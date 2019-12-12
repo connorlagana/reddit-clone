@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import axios from 'axios'
+// import axios from 'axios'
 import './App.css';
+import 'font-awesome/css/font-awesome.min.css';
+
 
 import CreatePost from './components/createPost'
-import { thisExpression } from '@babel/types';
 
 class App extends Component {
   constructor(props) {
@@ -35,12 +36,14 @@ class App extends Component {
       case 'plus':
         sentPost.voteCount++
         break
-      case "minus":
+      case 'minus':
         sentPost.voteCount--
         break
       default:
         console.log("something something")
     }
+    posts.sort((a, b) => a.voteCount - b.voteCount)
+
     this.setState({
       posts: [...posts, sentPost]
     })
@@ -85,8 +88,12 @@ class App extends Component {
             <h5>{post.content}</h5>
             <p>{post.author}</p>
             <p>{post.voteCount}</p>
-            <button onClick={(e) => this.vote(e, post, "plus")}>Up</button>
-            <button onClick={(e) => this.vote(e, post, "minus")}>Down</button>
+            <i
+              class="fa fa-angle-double-up"
+              onClick={(e) => this.vote(e, post, "plus")}></i>
+            <i
+              class="fa fa-angle-double-down"
+              onClick={(e) => this.vote(e, post, "minus")}></i>
           </div>)
         }
       </div>
